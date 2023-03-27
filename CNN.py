@@ -43,24 +43,8 @@ test_df, valid_df = train_test_split(dummy_df, train_size = test_split, shuffle 
 #print (train_df['label'].value_counts())
 #print (train_df['image'].value_counts())
 
-
-#print(train_df)
-#print(train_df.at[0,'image'])
-
-'''
-for i in range(25):
-    #try:
-        temp_str = str(train_df.iloc[i]['image'])
-        print(temp_str)
-        file_num = temp_str[-11:]
-        print(file_num)
-    #except KeyError:
-    #    break
-'''
-
 # Change Working Directory to Image Folder -> Overcomes string error in Display
 os.chdir(r'C:\Users\Drewster26\Desktop\Skin Lesion Project\Skin-Legion-Classification\images')
-
 
 # Display First 25 images from training set
 plt.figure(figsize=(10,10))
@@ -82,3 +66,6 @@ plt.show()
 
 # Change Working Directory Back to Main -> Overcomes string error in Display
 os.chdir(r'C:\Users\Drewster26\Desktop\Skin Lesion Project\Skin-Legion-Classification')
+
+
+
