@@ -6,7 +6,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 import tensorflow as tf
-from tensorflow.keras import datasets, layers, models 
+#from tensorflow.keras import datasets, layers, models 
 
 
 # Read CSV File
