@@ -6,8 +6,8 @@ import os
 from sklearn.model_selection import train_test_split
 
 import tensorflow as tf
-
-from tensorflow.python.keras import datasets, layers, models
+from tensorflow import keras
+from tensorflow.keras import datasets, layers, models
 import matplotlib.pyplot as plt
 
 # Read CSV File
@@ -38,7 +38,6 @@ train_df, dummy_df = train_test_split(df, train_size = train_split, shuffle = Tr
 test_df, valid_df = train_test_split(dummy_df, train_size = test_split, shuffle = True, random_state = 7261)
 
 # Show number of each class present in each dataset
-
 #print(' train_df length: ', len(train_df), '  test_df length: ', len(test_df), '  valid_df length: ', len(valid_df))  
 #print (train_df.head())
 #print (train_df['label'].value_counts())
@@ -68,6 +67,8 @@ plt.show()
 # Change Working Directory Back to Main -> Overcomes string error in Display
 os.chdir(r'C:\Users\Drewster26\Desktop\Skin Lesion Project\Skin-Legion-Classification')
 
+
+# *Update Image Storage for training *
 
 # Create Convolutional Base
 model = models.Sequential()
