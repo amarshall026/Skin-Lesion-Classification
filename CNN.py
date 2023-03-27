@@ -1,5 +1,4 @@
 #Import Relevant Python Packages
-import matplotlib.pyplot as plt
 import numpy as np
 import PIL
 import pandas as pd
@@ -7,7 +6,9 @@ import os
 from sklearn.model_selection import train_test_split
 
 import tensorflow as tf
-#from tensorflow.keras import datasets, layers, models 
+
+from tensorflow.python.keras import datasets, layers, models
+import matplotlib.pyplot as plt
 
 # Read CSV File
 df = pd.read_csv('GroundTruth\GroundTruth.csv', dtype = str)
@@ -68,4 +69,37 @@ plt.show()
 os.chdir(r'C:\Users\Drewster26\Desktop\Skin Lesion Project\Skin-Legion-Classification')
 
 
+# Create Convolutional Base
+model = models.Sequential()
+model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(600, 450, 3)))
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Conv2D(64, (3, 3), activation='relu'))
 
+# Add Dense layers
+model.add(layers.Flatten())
+model.add(layers.Dense(64, activation='relu'))
+model.add(layers.Dense(10))
+
+# Compile and Train Model
+model.compile(optimizer='adam',
+              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+              metrics=['accuracy'])
+
+history = model.fit(train_df.loc[:,['image']], train_df.loc[:,['label']], epochs=10, 
+                    validation_data=(valid_df.loc[:,['image']], valid_df.loc[:,['label']]))
+
+# Training Plot
+
+plt.plot(history.history['accuracy'], label='accuracy')
+plt.plot(history.history['val_accuracy'], label = 'val_accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.ylim([0.5, 1])
+plt.legend(loc='lower right')
+
+# Evaluate Model
+test_loss, test_acc = model.evaluate(test_df.loc[:,['image']], test_df.loc[:,['label']], verbose=2)
+
+print(test_acc)
