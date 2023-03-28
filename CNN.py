@@ -70,6 +70,7 @@ os.chdir(r'C:\Users\Drewster26\Desktop\Skin Lesion Project\Skin-Legion-Classific
 
 # *Update Image Storage for training *
 
+'''
 # Create Convolutional Base
 model = models.Sequential()
 model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(600, 450, 3)))
@@ -104,3 +105,4 @@ plt.legend(loc='lower right')
 test_loss, test_acc = model.evaluate(test_df.loc[:,['image']], test_df.loc[:,['label']], verbose=2)
 
 print(test_acc)
+'''
